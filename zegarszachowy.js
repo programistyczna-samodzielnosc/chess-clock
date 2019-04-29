@@ -5,6 +5,8 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
     const button = document.getElementById('button')
     button.onclick = nextPlayer
 
+    let playersLeft = n
+
     let html ='';
     let clocks = [];
 
@@ -12,7 +14,8 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
         let zegar = {
             id: i,
             elapsedTime: defaultTime,
-            html: zegarHTML(i, defaultTime)
+            html: zegarHTML(i, defaultTime),
+            lost: false
         }
         clocks.push(zegar);
         html += zegar.html;
@@ -29,6 +32,18 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
                 next=0;
             }
         }
+        
+        
+        if(clocks[next].lost) {
+            return nextPlayer()
+        }
+
+        if(playersLeft===1) {
+            let resultInfo = document.getElementById(`result-${next}`)
+            resultInfo.innerHTML = 'wygrales !!!'
+            return
+        }
+        
         startTime = Date.now();
         (function(nextCopy){
             refreshClockDisplay(nextCopy,0)
@@ -48,8 +63,11 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
                 let playerResult = document.getElementById(`result-${clockId}`)
 
                 if(updateData.lost) {
+                    clocks[clockId].lost = true;
                     playerResult.innerHTML = "przegrales:( Koniec gry"
-                    return;
+                    playersLeft--
+                    
+                    return nextPlayer()
                 }
 
                 if(updateData.warning) {
@@ -137,6 +155,6 @@ function zegarHTML(id, elapsedTime) {
 }
 
 window.onload = function() {
-    zegarSzachowy(7, 1000* 60 *60*100 + 13245,2000,2000)
+    zegarSzachowy(4, 2000,2000,2000)
 }
 
