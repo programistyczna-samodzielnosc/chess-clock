@@ -3,25 +3,44 @@
     <title>Zegar Szachowy</title>
     <script src="zegarszachowy.js"></script>
     <style>
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
         #game {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
         .zegar {
             margin-top:20px;
             position: relative;
-            flex:1;
+            flex:45% 0 1;
             border:5px solid brown;
             background-color: beige;
         }
+        #navigation {
+            display: flex;
+        }
 
         #button {
-            width:20%;
-            margin:0 auto;
+            box-sizing: border-box;
+            flex:1;
             margin:20px;
-            height:30px;
+            text-align: center;
+            padding:20px;
+            cursor: pointer;
             font-size:20px;
             font-weight: bold;
             display: block;
+            color:white;
+            background-color: red;
+        }
+
+        #button:hover {
+            background-color: darkgreen;
+        }
+        h3{ 
+            text-align: center;
         }
 
         .display {
@@ -38,6 +57,9 @@
 <body>
     <div id="game">
     </div>
-    <button id="button"></button>
+    <div class="navigation">
+        <div id="button">Nastepny gracz</div>
+    </div>
+    
 </body>
 </html>

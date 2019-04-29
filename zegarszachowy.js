@@ -29,7 +29,6 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
                 next=0;
             }
         }
-        console.log('nextPlayer')
         startTime = Date.now();
         (function(nextCopy){
             refreshClockDisplay(nextCopy,0)
@@ -138,6 +137,6 @@ function zegarHTML(id, elapsedTime) {
 }
 
 window.onload = function() {
-    zegarSzachowy(3, 1000* 60 *60*100 + 13245,2000,2000)
+    zegarSzachowy(7, 1000* 60 *60*100 + 13245,2000,2000)
 }
 
