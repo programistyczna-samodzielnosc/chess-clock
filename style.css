@@ -1,0 +1,115 @@
+#game 
+{
+    display: flex;
+}
+
+.underTheClocks
+{
+    position: relative 
+}
+
+.zegar 
+{
+    margin-top: 20px;
+    position: relative;
+    flex: 1;
+    border: 5px solid brown;
+    background-color: beige;
+}
+
+.allClockButtons
+{
+    display: flex; 
+    width: 186px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    margin: 20px;
+    margin-left: 0px; 
+  
+}
+
+.clockButtons 
+{
+    padding-left: 15px;
+    font-size: 25px;
+    flex: 1;
+    border-radius: 50%;
+    height: 50px;
+    border: 1px solid rgb(190,161,97);
+    color: rgb(204,0,0);
+    margin-left: 10px
+}
+
+.clockButtons:hover
+{
+    background-color: rgb(190,161,97);
+    color: rgb(255,255,255);
+    cursor: pointer;  
+}
+
+.display 
+{ 
+    color: black;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+.active 
+{
+    background-color: #72ff80;
+}
+
+.inactive 
+{
+    background-color: aquamarine;  
+}
+
+.lastSecondsClock 
+{
+    color: crimson;
+    font-weight: bold;
+}
+
+.playerName 
+{
+    text-align: center;  
+    font-size: 28px;
+    font-style: italic;
+    font-family: OFL Sorts Mill Goudy, Noto Nastaliq Urdu, My Noto Nastaliq Urdu, Georgia, serif;
+}
+
+.sign 
+{
+     position: relative;    
+}
+
+#play_sign 
+{
+     transform: translate(-10%, 38%);
+}
+
+#pause_sign 
+{
+     transform: translate(-22%, 60%); 
+}
+
+#reset_sign
+{ 
+    transform: translate(-20%, 30%);
+}
+
+.gameOver {
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    margin: 20px;
+    margin-left: 0px; 
+}
+
+.invisible {
+    display: none;  
+}
