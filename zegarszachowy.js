@@ -44,7 +44,12 @@ function zegarSzachowy(n, defaultTime, addedTime) {
                     finish = true;
                 }
                 let currentTime = Date.now();
-                updateClock(clockId, currentTime - startTime)
+                let lost = updateClock(clockId, currentTime - startTime)
+                if(lost) {
+                    let playerResult = document.getElementById(`result-${clockId}`)
+                    playerResult.innerHTML = "przegrales:( Koniec gry"
+                    return;
+                }
                 
                 if(finish) return;
                 
@@ -55,11 +60,19 @@ function zegarSzachowy(n, defaultTime, addedTime) {
         }
     }
 
+    //zwraca true jesli przegralismy; false jesli zostal nam jakis czas
     function updateClock(clockId, takenTime) {
         clocks[clockId].elapsedTime -= takenTime
+        
         let clockHTML = document.getElementById(`zegar-${clockId}`)
         let displayHTML = document.getElementById(`display-${clockId}`)
+        if (clocks[clockId].elapsedTime <= 0) {
+            displayHTML.innerHTML = 0;
+            return true;
+            
+        }
         displayHTML.innerHTML =  clocks[clockId].elapsedTime;
+        return false;
     }
 
     window.addEventListener('keyup', function(keyupEvent){
@@ -72,12 +85,13 @@ function zegarSzachowy(n, defaultTime, addedTime) {
 function zegarHTML(id, elapsedTime) {
     return `<div class="zegar" id="zegar-${id}">
             <div id="display-${id}" class="display">${elapsedTime}</div>
-            <h3>gracz ${id}</h3>
+            <h3 id="gracz-${id}">gracz ${id}</h3>
+            <div id="result-${id}"></div>
         </div>
     `
 }
 
 window.onload = function() {
-    zegarSzachowy(3, 30000,2000)
+    zegarSzachowy(3, 2000,2000)
 }
 
