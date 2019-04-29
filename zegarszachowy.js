@@ -32,7 +32,7 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
         console.log('nextPlayer')
         startTime = Date.now();
         (function(nextCopy){
-            refreshClockDisplay(nextCopy,238)
+            refreshClockDisplay(nextCopy,0)
         }(next));
        
         newGame = false;
@@ -80,14 +80,14 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
         let clockHTML = document.getElementById(`zegar-${clockId}`)
         let displayHTML = document.getElementById(`display-${clockId}`)
         if (clocks[clockId].elapsedTime <= 0) {
-            displayHTML.innerHTML = 0
+            displayHTML.innerHTML = formatTime(0)
             ret.lost = true
             return ret
         }
         
         ret.warning = clocks[clockId].elapsedTime <= warningTime
 
-        displayHTML.innerHTML =  clocks[clockId].elapsedTime
+        displayHTML.innerHTML =  formatTime(clocks[clockId].elapsedTime)
         return ret
     }
 
@@ -98,9 +98,39 @@ function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
     })
 }
 
+function formatTime(timeInMS) {
+    //godz:min:sek:dzies
+    const GODZINA = 1000 * 60 * 60
+    const MINUTA = 1000 * 60
+    const SEKUNDA = 1000
+    const DZIESIETNA = 100
+
+    let godzina = Math.floor(timeInMS / GODZINA)
+    timeInMS -= godzina * GODZINA;
+
+    let minuta = Math.floor(timeInMS/ MINUTA)
+    timeInMS -= minuta * MINUTA;
+
+    let sekunda = Math.floor(timeInMS/ SEKUNDA)
+    timeInMS -= sekunda * SEKUNDA;
+
+    let dziesietna = Math.floor(timeInMS/ DZIESIETNA)
+    timeInMS -= dziesietna * DZIESIETNA;
+
+
+    return `${paddingZeros(godzina)}:${paddingZeros(minuta)}:${paddingZeros(sekunda)}:${paddingZeros(dziesietna)}`
+}
+
+function paddingZeros(liczba) {
+    if (liczba < 10) {
+        return `0${liczba}`
+    }
+    return liczba
+}
+
 function zegarHTML(id, elapsedTime) {
     return `<div class="zegar" id="zegar-${id}">
-            <div id="display-${id}" class="display">${elapsedTime}</div>
+            <div id="display-${id}" class="display">${formatTime(elapsedTime)}</div>
             <h3 id="gracz-${id}">gracz ${id}</h3>
             <div id="result-${id}"></div>
         </div>
@@ -108,6 +138,6 @@ function zegarHTML(id, elapsedTime) {
 }
 
 window.onload = function() {
-    zegarSzachowy(3, 5000,2000,2000)
+    zegarSzachowy(3, 1000* 60 *60*100 + 13245,2000,2000)
 }
 
