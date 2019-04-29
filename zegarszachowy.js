@@ -1,4 +1,4 @@
-function zegarSzachowy(n, defaultTime, addedTime) {
+function zegarSzachowy(n, defaultTime, addedTime, warningTime) {
     let newGame = true;
     let next = 0;
     const game = document.getElementById('game')
@@ -44,11 +44,20 @@ function zegarSzachowy(n, defaultTime, addedTime) {
                     finish = true;
                 }
                 let currentTime = Date.now();
-                let lost = updateClock(clockId, currentTime - startTime)
-                if(lost) {
-                    let playerResult = document.getElementById(`result-${clockId}`)
+                let updateData = updateClock(clockId, currentTime - startTime)
+
+                let playerResult = document.getElementById(`result-${clockId}`)
+
+                if(updateData.lost) {
                     playerResult.innerHTML = "przegrales:( Koniec gry"
                     return;
+                }
+
+                if(updateData.warning) {
+                    
+                    playerResult.innerHTML = `Masz mniej niz ${warningTime}. zaraz przegrasz!!!`
+                } else {
+                    playerResult.innerHTML = ``
                 }
                 
                 if(finish) return;
@@ -62,17 +71,24 @@ function zegarSzachowy(n, defaultTime, addedTime) {
 
     //zwraca true jesli przegralismy; false jesli zostal nam jakis czas
     function updateClock(clockId, takenTime) {
+        let ret = {
+            lost: false,
+            warning: false
+        }
         clocks[clockId].elapsedTime -= takenTime
         
         let clockHTML = document.getElementById(`zegar-${clockId}`)
         let displayHTML = document.getElementById(`display-${clockId}`)
         if (clocks[clockId].elapsedTime <= 0) {
-            displayHTML.innerHTML = 0;
-            return true;
-            
+            displayHTML.innerHTML = 0
+            ret.lost = true
+            return ret
         }
-        displayHTML.innerHTML =  clocks[clockId].elapsedTime;
-        return false;
+        
+        ret.warning = clocks[clockId].elapsedTime <= warningTime
+
+        displayHTML.innerHTML =  clocks[clockId].elapsedTime
+        return ret
     }
 
     window.addEventListener('keyup', function(keyupEvent){
@@ -92,6 +108,6 @@ function zegarHTML(id, elapsedTime) {
 }
 
 window.onload = function() {
-    zegarSzachowy(3, 2000,2000)
+    zegarSzachowy(3, 5000,2000,2000)
 }
 

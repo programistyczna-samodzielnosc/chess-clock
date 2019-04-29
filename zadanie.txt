@@ -7,3 +7,4 @@
 4. co ruch dodajemy okreslona liczba sekund np 2sekundy
 5. gracz zatrzymuje swoj zegar i uruchamia zegar nastepnego gracza przyciskiem spacji
 6. Zrob ladny zegar i ladny przycisk :) 
+7. wykluczamy gracza ale gra idzie dalej i pozostali gracze nadal walcza o zwyciestwo
