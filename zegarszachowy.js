@@ -1,4 +1,4 @@
-function zegarSzachowy(n, defaultTime) {
+function zegarSzachowy(n, defaultTime, addedTime) {
     let newGame = true;
     let next = 0;
     const game = document.getElementById('game')
@@ -23,6 +23,7 @@ function zegarSzachowy(n, defaultTime) {
     //zatrzymuje zegar ktory jest mniejszy o 1 lub w przypadku next=0 koncowy zegar
     function nextPlayer() {
         if(!newGame) {
+            clocks[next].elapsedTime += addedTime
             next+=1;
             if(next>=clocks.length) {
                 next=0;
@@ -77,6 +78,6 @@ function zegarHTML(id, elapsedTime) {
 }
 
 window.onload = function() {
-    zegarSzachowy(3, 30000)
+    zegarSzachowy(3, 30000,2000)
 }
 
