@@ -60,6 +60,12 @@ function zegarSzachowy(n, defaultTime) {
         let displayHTML = document.getElementById(`display-${clockId}`)
         displayHTML.innerHTML =  clocks[clockId].elapsedTime;
     }
+
+    window.addEventListener('keyup', function(keyupEvent){
+        if(keyupEvent.keyCode === 32) {
+            nextPlayer()
+        } 
+    })
 }
 
 function zegarHTML(id, elapsedTime) {
@@ -73,3 +79,4 @@ function zegarHTML(id, elapsedTime) {
 window.onload = function() {
     zegarSzachowy(3, 30000)
 }
+
