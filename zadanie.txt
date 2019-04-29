@@ -1,0 +1,9 @@
+0. wykonaj zegar szachowy dla wielu graczy
+
+
+1. informacja o zakonczeniu gry i przegranej gracza
+2. przypomnienie ze zaraz przegrasz np za 5 sekund(lub ustalony czas)
+3. zmienic wyswietlanie na godziny:minuty:sekundy
+4. co ruch dodajemy okreslona liczba sekund np 2sekundy
+5. gracz zatrzymuje swoj zegar i uruchamia zegar nastepnego gracza przyciskiem spacji
+6. Zrob ladny zegar i ladny przycisk :) 
